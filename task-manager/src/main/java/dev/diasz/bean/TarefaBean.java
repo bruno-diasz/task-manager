@@ -1,34 +1,46 @@
 package dev.diasz.bean;
 
 import dev.diasz.model.Tarefa;
+import dev.diasz.service.TarefaService;
 
-import javax.enterprise.context.RequestScoped;
+import javax.annotation.PostConstruct;
+import javax.inject.Inject;
 import javax.inject.Named;
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
-import javax.transaction.Transactional;
+import java.io.Serializable;
+import java.util.List;
+import javax.faces.view.ViewScoped;
 
 @Named
-@RequestScoped
-public class TarefaBean {
+@ViewScoped
+public class TarefaBean implements Serializable {
 
-    @PersistenceContext
-    private EntityManager em;
+    @Inject
+    private TarefaService service;
 
-    private String titulo;
+    private Tarefa tarefa;
+    private List<Tarefa> lista;
 
-    @Transactional
+    @PostConstruct
+    public void init() {
+        tarefa = new Tarefa();
+        lista = service.listar();
+    }
+
     public void salvar() {
-        Tarefa t = new Tarefa();
-        t.setTitulo(titulo);
-        em.persist(t);
+        service.salvar(tarefa);
+        tarefa = new Tarefa();
+        lista = service.listar(); // atualiza tabela
     }
 
-    public String getTitulo() {
-        return titulo;
+    public List<Tarefa> getLista() {
+        return lista;
     }
 
-    public void setTitulo(String titulo) {
-        this.titulo = titulo;
+    public Tarefa getTarefa() {
+        return tarefa;
+    }
+
+    public void setTarefa(Tarefa tarefa) {
+        this.tarefa = tarefa;
     }
 }

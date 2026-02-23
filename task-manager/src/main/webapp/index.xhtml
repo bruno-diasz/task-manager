@@ -19,7 +19,7 @@
             <p:outputLabel for="titulo" value="Título:" />
             
             <p:inputText id="titulo"
-                         value="#{tarefaBean.titulo}"
+                         value="#{tarefaBean.tarefa.titulo}"
                          required="true"
                          requiredMessage="O título é obrigatório"
                          style="width:100%" />
@@ -28,8 +28,7 @@
 
             <p:commandButton value="Salvar"
                              action="#{tarefaBean.salvar}"
-                             update="@form"
-                             icon="pi pi-save"/>
+                             update="@form"/>
 
         </p:panel>
 
