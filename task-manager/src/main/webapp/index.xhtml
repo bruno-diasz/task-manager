@@ -6,59 +6,79 @@
 
 <h:head>
     <title>Lista de Tarefas</title>
+    <h:outputStylesheet library="primefaces" name="primeicons/primeicons.css" />
+    <style>
+        .pi { margin-right: 5px; }
+    </style>
 </h:head>
 
 <h:body>
 
     <h:form id="form">
         <p:panel header="Listagem de Tarefas" style="width:60%; margin: 0 auto;">
+            <f:facet name="actions">
+                <p:button title="Pessoas" outcome="pessoas" icon="pi pi-user" style="margin-right: 5px;"/>
+            </f:facet>
+            <f:facet name="actions">
+                <p:button title="Nova Tarefa" value="Nova Tarefa" outcome="cadastrar" icon="pi pi-plus" />
+            </f:facet>
             <p:messages autoUpdate="true" />
 
             <!-- Filtro / Busca -->
             <div style="display: flex; gap: 20px;">
                 <div style="flex: 1;">
-                    <p:outputLabel for="idtarefa" value="Id: " />
-                    <p:inputNumber id="idtarefa"
-                                   value="0"
-                                   minValue="1" 
-                                   decimalPlaces="0" 
-                                   thousandSeparator="" 
-                                   decimalSeparator="" />
+                    <h:panelGroup layout="block" style="margin-bottom: 8px;">
+                        <i class='pi pi-id-card'></i>
+                        <span>Id:</span>
+                    </h:panelGroup>
+                <p:inputText id="idtarefa" value="#{tarefaBean.filtroId}" style="width: 100px;" validatorMessage="O ID deve ser maior que zero." converterMessage="Letras não são permitidas.">
+                    <f:convertNumber integerOnly="true" />
+                    <f:validateLongRange minimum="1" />
+                </p:inputText>
                 </div>
-                <div style="flex: 1;">
-                    <p:commandButton value="Buscar Tarefas"
-                                     action="#{tarefaBean.salvar}"
+                <div style="flex: 1; margin-top: 20px;">
+                    <p:commandButton title="Buscar Tarefas"
+                                     value="Buscar Tarefas"
+                                     action="#{tarefaBean.filtrar}"
+                                     icon="pi pi-search"
                                      update="@form"/>
                 </div>
             </div>
 
             <br/>
             
-            <!-- Formulário de tarefa -->
-            <p:outputLabel for="titulo" value="Título/Descrição:" />
+            <h:panelGroup layout="block" style="margin-bottom: 8px;">
+                <i class='pi pi-file'></i>
+                <span>Título/Descrição:</span>
+            </h:panelGroup>
             <p:inputText id="titulo"
-                         value="#{tarefaBean.tarefa.titulo}"
-                         required="true"
-                         requiredMessage="O título é obrigatório"
-                         style="width:95%" />
+                         value="#{tarefaBean.filtroTitulo}"
+                         style="width:95%"
+                         placeholder="Buscar por título ou descrição" />
 
             <br/><br/>
 
             <div style="display: flex; gap: 20px;">
                 <!-- Responsável -->
                 <div style="flex: 1;">
-                    <p:outputLabel for="responsavel" value="Responsável:" style="display: block;" />
-                    <p:selectOneMenu id="responsavel" value="#{tarefaBean.tarefa.responsavel}" style="width: 90%;">
-                        <f:selectItem itemLabel="Selecione..." itemValue="" noSelectionOption="true" />
-                        <f:selectItems value="#{tarefaBean.pessoas}" var="p" itemLabel="#{p.nome}" itemValue="#{p}" />
+                    <h:panelGroup layout="block" style="margin-bottom: 8px;">
+                        <i class='pi pi-user'></i>
+                        <span>Responsável:</span>
+                    </h:panelGroup>
+                    <p:selectOneMenu id="responsavel" value="#{tarefaBean.filtroResponsavelId}" style="width: 90%;">
+                        <f:selectItem itemLabel="Todos" itemValue="#{null}"/>
+                        <f:selectItems value="#{tarefaBean.pessoas}" var="p" itemLabel="#{p.nome}" itemValue="#{p.id}" />
                     </p:selectOneMenu>
                 </div>
             
                 <!-- Situação -->
                 <div style="flex: 1;">
-                    <p:outputLabel for="situacao" value="Situação:" style="display: block;" />
-                    <p:selectOneMenu id="situacao" value="#{tarefaBean.tarefa.situacao}" style="width: 90%;">
-                        <f:selectItem itemLabel="Selecione..." itemValue="" noSelectionOption="true" />
+                    <h:panelGroup layout="block" style="margin-bottom: 8px;">
+                        <i class='pi pi-check-square'></i>
+                        <span>Situação:</span>
+                    </h:panelGroup>
+                    <p:selectOneMenu id="situacao" value="#{tarefaBean.filtroSituacao}" style="width: 90%;">
+                        <f:selectItem itemLabel="Todas" itemValue="#{null}" />
                         <f:selectItems value="#{tarefaBean.situacoes}" var="s" itemLabel="#{s.descricao}" itemValue="#{s}" />
                     </p:selectOneMenu>
                 </div>
@@ -67,9 +87,15 @@
             <br/><br/>
 
             <!-- DataTable de tarefas -->
-            <p:dataTable id="tabelaTarefas" value="#{tarefaBean.lista}" var="t" style="width:100%;">
+            <p:dataTable id="tabelaTarefas"
+                         emptyMessage="Nenhuma Tarefa cadastrada."
+                         rows="10" paginator="true" 
+                         paginatorPosition="bottom"
+                         value="#{tarefaBean.lista}"
+                         var="t" 
+                         style="width:100%;">
 
-                <p:column headerText="Id" style="width: 60px;">
+                <p:column headerText="Id" style="width: 60px; text-align: center;">
                     #{t.id}
                 </p:column>
                 <p:column headerText="Título">
@@ -80,28 +106,28 @@
                 </p:column>
                 <p:column headerText="Ações" style="text-align:center;">
 
-                    <p:link value="Ver | " outcome="visualizar" style="text-decoration: none;">
+                    <p:button icon="pi pi-eye" title="Visualizar" outcome="visualizar" style="margin-right: 5px;">
                         <f:param name="id" value="#{t.id}" />
-                    </p:link>
+                    </p:button>
 
-                    <p:link value="Editar | " outcome="editar" style="text-decoration: none;">
+                    <p:button icon="pi pi-pencil" title="Editar" outcome="editar" style="margin-right: 5px;">
                         <f:param name="id" value="#{t.id}" />
-                    </p:link>
+                    </p:button>
 
-                    <p:commandLink value="Excluir | " 
+                    <p:commandButton icon="pi pi-trash" 
+                                     title="Excluir"
                                      actionListener="#{tarefaBean.remover(t.id)}"
                                      update="@form" 
                                      process="@this"
-                                     style="text-decoration: none;"
+                                     style="margin-right: 5px;"
                                     />
-                    
 
-                    <p:commandLink value="Concluir" 
+                    <p:commandButton icon="pi pi-check" 
+                                     title="Concluir"
                                      actionListener="#{tarefaBean.concluir(t)}"
                                      update="@form" 
                                      process="@this"
-                                     style="text-decoration: none;"
-                                     
+                                     rendered="#{t.situacao != 'CONCLUIDA'}"
                                      />
 
                 </p:column>

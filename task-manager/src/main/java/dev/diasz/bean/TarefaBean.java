@@ -26,10 +26,17 @@ public class TarefaBean implements Serializable {
     @Inject
     private PessoaService pessoaService;
 
-    private Tarefa tarefa;
-    private List<Tarefa> lista;
-    private long responsavelId;
-    private List<Pessoa> pessoas;
+    // 
+    private Tarefa tarefa; // Tarefa selecionada
+    private List<Tarefa> lista; //Listagem para o front
+    private List<Pessoa> pessoas; //Listagem para o front
+    private Long responsavelId; 
+
+    // Atributos de filtro
+    private Long filtroId;
+    private String filtroTitulo;
+    private Long filtroResponsavelId;
+    private SituacaoTarefa filtroSituacao;
 
     @PostConstruct
     public void init() {
@@ -41,39 +48,66 @@ public class TarefaBean implements Serializable {
                 .getRequestParameterMap()
                 .get("id");
 
-        if (idParam != null) {
-            tarefa = service.buscarID(Long.parseLong(idParam));
-
-            if (tarefa.getResponsavel() != null) {
-                responsavelId = tarefa.getResponsavel().getId();
+        try {
+            if (idParam != null && !idParam.isEmpty()) {
+                tarefa = service.buscarID(Long.parseLong(idParam));
+                if (tarefa != null && tarefa.getResponsavel() != null) {
+                    responsavelId = tarefa.getResponsavel().getId();
+                }
+            } else {
+                tarefa = new Tarefa();
             }
-        } else {
+        } catch (NumberFormatException e) {
             tarefa = new Tarefa();
         }
 
-        lista = service.listar();
+        setFiltroSituacao(SituacaoTarefa.EM_ANDAMENTO);
+        filtrar();
+
+
     }
 
     public String salvar() {
-        Pessoa responsavel = pessoaService.buscarID(responsavelId);
-        tarefa.setResponsavel(responsavel);
+        if (responsavelId != null && responsavelId != 0 ){
+            Pessoa responsavel = pessoaService.buscarID(responsavelId);
+            tarefa.setResponsavel(responsavel);
+        }
         service.salvar(tarefa);
         tarefa = new Tarefa();
-        responsavelId = 0;
-        lista = service.listar(); 
+        responsavelId = 0L;
         return "index.xhtml?faces-redirect=true";
     }
 
     public void editar(Tarefa t) {
         tarefa = t; 
-        responsavelId = t.getResponsavel().getId(); 
+        if (t.getResponsavel() != null){
+            responsavelId = t.getResponsavel().getId(); 
+        }else{
+            responsavelId = 0L;
+        }
     }
 
-    public void remover(long id){
+    public void remover(Long id){
         service.remover(id);
-        lista = service.listar();
+        filtrar();
     }
-
+    
+    public void concluir(Tarefa t) {
+        service.concluir(t.getId());
+        filtrar();
+    }
+    
+    public void filtrar(){
+     
+        lista = service.buscarComFiltro(
+            filtroId,
+            filtroTitulo,
+            filtroResponsavelId,
+            filtroSituacao
+        );
+    }
+    
+    // Setters e Getters
     public List<Tarefa> getLista() {
         return lista;
     }
@@ -87,11 +121,11 @@ public class TarefaBean implements Serializable {
     }
 
 
-    public long getResponsavelId() {
+    public Long getResponsavelId() {
         return responsavelId;
     }
 
-    public void setResponsavelId(long responsavelId) {
+    public void setResponsavelId(Long responsavelId) {
         this.responsavelId = responsavelId;
     }
 
@@ -110,4 +144,40 @@ public class TarefaBean implements Serializable {
     public List<Pessoa> getPessoas(){
         return pessoas;
     }
+
+    public Long getFiltroId() {
+        return filtroId;
+    }
+
+    public void setFiltroId(Long filtroId) {
+        this.filtroId = filtroId;
+    }
+
+    public String getFiltroTitulo() {
+        return filtroTitulo;
+    }
+
+    public void setFiltroTitulo(String filtroTitulo) {
+        this.filtroTitulo = filtroTitulo;
+    }
+
+
+    public SituacaoTarefa getFiltroSituacao() {
+        return filtroSituacao;
+    }
+
+    public void setFiltroSituacao(SituacaoTarefa filtroSituacao) {
+        this.filtroSituacao = filtroSituacao;
+    }
+
+    public Long getFiltroResponsavelId() {
+        return filtroResponsavelId;
+    }
+
+    public void setFiltroResponsavelId(Long filtroResponsavelId) {
+        this.filtroResponsavelId = filtroResponsavelId;
+    }
+
+    
+    
 }

@@ -3,22 +3,36 @@ package dev.diasz.model;
 import java.time.LocalDate;
 
 import javax.persistence.*;
+import javax.validation.constraints.FutureOrPresent;
 
 @Entity
 public class Tarefa {
+    // Atributos
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
+    @Column(nullable = false, length = 50)
     private String titulo;
+
+    @Column(columnDefinition = "TEXT", nullable = true)
     private String descricao;
+
+    @FutureOrPresent
+    @Column(nullable = true)
     private LocalDate deadline;
-    @ManyToOne
-    @JoinColumn(name = "responsavel_id", referencedColumnName = "id")
+
+    @ManyToOne()
+    @JoinColumn(name = "responsavel_id", nullable = true)
     private Pessoa responsavel;
+
     @Enumerated(EnumType.STRING)
+    @Column(nullable = false)
     private Prioridade prioridade;
+
     @Enumerated(EnumType.STRING)
+    @Column(nullable = false)
     private SituacaoTarefa situacao = SituacaoTarefa.EM_ANDAMENTO;
 
     // getters e setters

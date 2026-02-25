@@ -32,6 +32,10 @@ public class PessoaService {
     public void remover(Long id) {
         Pessoa p = buscarID(id);
         if (p != null) {
+            em.createQuery("UPDATE Tarefa t SET t.responsavel = null WHERE t.responsavel = :p")
+              .setParameter("p", p)
+              .executeUpdate();
+
             em.remove(p);
         }
     }

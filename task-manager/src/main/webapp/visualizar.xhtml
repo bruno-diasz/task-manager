@@ -6,6 +6,10 @@
 
 <h:head>
     <title>Visualizar Tarefa</title>
+    <h:outputStylesheet library="primefaces" name="primeicons/primeicons.css" />
+    <style>
+        .pi { margin-right: 5px; }
+    </style>
 </h:head>
 
 <h:body>
@@ -17,34 +21,56 @@
 
             <h:panelGrid columns="2" cellpadding="8">
 
-                <h:outputText value="ID:" />
+                <h:panelGroup>
+                    <i class='pi pi-id-card'></i>
+                    <span>ID:</span>
+                </h:panelGroup>
                 <h:outputText value="#{tarefaBean.tarefa.id}" />
 
-                <h:outputText value="Título:" />
+                <h:panelGroup>
+                    <i class='pi pi-file'></i>
+                    <span>Título:</span>
+                </h:panelGroup>
                 <h:outputText value="#{tarefaBean.tarefa.titulo}" />
 
-                <h:outputText value="Descrição:" />
+                <h:panelGroup>
+                    <i class='pi pi-align-justify'></i>
+                    <span>Descrição:</span>
+                </h:panelGroup>
                 <h:outputText value="#{tarefaBean.tarefa.descricao}" />
 
-                <h:outputText value="Responsável:" />
+                <h:panelGroup>
+                    <i class='pi pi-user'></i>
+                    <span>Responsável:</span>
+                </h:panelGroup>
                 <h:outputText value="#{tarefaBean.tarefa.responsavel.nome}" />
 
-                <h:outputText value="Prioridade:" />
+                <h:panelGroup>
+                    <i class='pi pi-sort'></i>
+                    <span>Prioridade:</span>
+                </h:panelGroup>
                 <h:outputText value="#{tarefaBean.tarefa.prioridade.descricao}" />
 
-                <h:outputText value="Situação:" />
+                <h:panelGroup>
+                    <i class='pi pi-check-square'></i>
+                    <span>Situação:</span>
+                </h:panelGroup>
                 <h:outputText value="#{tarefaBean.tarefa.situacao.descricao}" />
 
-                <h:outputText value="Deadline:" />
-                <h:outputText value="#{tarefaBean.tarefa.deadline}" />
-
+                <h:panelGroup>
+                    <i class='pi pi-calendar'></i>
+                    <span>Deadline:</span>
+                </h:panelGroup>
+                <h:outputText value="#{tarefaBean.tarefa.deadline}">
+                    <f:convertDateTime type="localDate" pattern="dd/MM/yyyy" />
+                </h:outputText>
             </h:panelGrid>
 
             <br/>
 
-            <p:button value="Voltar" outcome="index" />
+            <p:button value="Voltar" outcome="index" icon="pi pi-arrow-left" />
 
-            <p:button value="Editar" outcome="editar">
+            <p:button value="Editar" outcome="editar" icon="pi pi-pencil" style="margin-left: 10px;">
                 <f:param name="id" value="#{tarefaBean.tarefa.id}" />
             </p:button>
 

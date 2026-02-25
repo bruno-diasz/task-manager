@@ -34,6 +34,11 @@ public class PessoaBean implements Serializable{
         lista = service.listar(); // atualiza tabela
     }
 
+    public void remover(Long id){
+        service.remover(id);
+        lista = service.listar();
+    }
+
     public List<Pessoa> getLista() {
         return lista;
     }

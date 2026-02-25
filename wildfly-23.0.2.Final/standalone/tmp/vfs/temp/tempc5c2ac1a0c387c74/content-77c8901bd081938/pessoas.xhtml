@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+    <title>Gerenciar Pessoas</title>
+    <h:outputStylesheet library="primefaces" name="primeicons/primeicons.css" />
+</h:head>
+
+<h:body>
+    <h:form id="formPessoas">
+        <p:messages id="msgs" closable="true">
+            <p:autoUpdate />
+        </p:messages>
+
+        <p:panel header="Cadastrar Nova Pessoa" style="margin-bottom: 20px; width: 60%; margin: 0 auto;">
+
+            <!-- Campo para adicionar  -->
+            <h:panelGrid columns="3" cellpadding="5">
+                <p:outputLabel for="nome" value="Nome:" />
+                <p:inputText id="nome" value="#{pessoaBean.pessoa.nome}" 
+                             required="true" 
+                             requiredMessage="O nome é obrigatório"
+                             placeholder="Digite o nome..." />
+                
+                <p:commandButton value="Adicionar" 
+                                 action="#{pessoaBean.salvar}" 
+                                 update="formPessoas" 
+                                 icon="pi pi-plus" />
+            </h:panelGrid>
+            <br/><br/>
+            <!-- Tabela -->
+            <p:dataTable id="tabelaPessoas" value="#{pessoaBean.lista}" var="p" 
+                         emptyMessage="Nenhuma pessoa cadastrada."
+                         rows="10" paginator="true" 
+                         paginatorPosition="bottom">
+                
+                <p:column headerText="ID" style="width: 50px; text-align: center;">
+                    <h:outputText value="#{p.id}" />
+                </p:column>
+    
+                <p:column headerText="Nome">
+                    <h:outputText value="#{p.nome}" />
+                </p:column>
+    
+                <p:column headerText="Ações" style="width: 100px; text-align: center;">
+                    <p:commandButton icon="pi pi-trash" 
+                                     title="Excluir"
+                                     action="#{pessoaBean.remover(p.id)}" 
+                                     update="@form"
+                                     process="@this">
+                    </p:commandButton>
+                </p:column>
+            </p:dataTable>
+            <br/><br/>
+            <!-- Botão -->
+            <p:button value="Voltar" outcome="index" icon="pi pi-arrow-left" />
+        </p:panel>
+
+    </h:form>
+</h:body>
+</html>

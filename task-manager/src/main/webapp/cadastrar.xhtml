@@ -6,6 +6,10 @@
 
 <h:head>
     <title>Cadastro de Tarefa</title>
+    <h:outputStylesheet library="primefaces" name="primeicons/primeicons.css" />
+    <style>
+        .pi { margin-right: 5px; }
+    </style>
 </h:head>
 
 <h:body>
@@ -16,37 +20,62 @@
 
             <p:messages autoUpdate="true" />
 
-            <p:outputLabel for="titulo" value="Título:" />
+            <!-- Título -->
+            <h:panelGroup layout="block" style="margin-bottom: 8px;">
+                <i class='pi pi-file'></i>
+                <span>Título*</span>
+            </h:panelGroup>
             
-            <p:inputText id="titulo"
-                         value="#{tarefaBean.tarefa.titulo}"
-                         required="true"
-                         requiredMessage="O título é obrigatório"
-                         style="width:100%" />
+            <p:inputText id="titulo" value="#{tarefaBean.tarefa.titulo}" 
+                 style="width: 100%;"
+                 required="true"
+                 requiredMessage="O título é obrigatório."
+                 validatorMessage="O título deve ter entre 3 e 50 caracteres.">
+        
+                <f:validateLength minimum="3" maximum="50" />
+        
+            </p:inputText>
 
             <br/><br/>
 
-            <p:outputLabel for="descricao" value="Descrição:" />
+            <!-- Descrição -->
+            <h:panelGroup layout="block" style="margin-bottom: 8px;">
+                <i class='pi pi-align-justify'></i>
+                <span>Descrição</span>
+            </h:panelGroup>
             <p:inputTextarea id="descricao"
                              value="#{tarefaBean.tarefa.descricao}"
-                             required="true"
-                             requiredMessage="O descricao é obrigatório"
                              autoResize="true"
-                             style="width:100%" />
+                             style="width:100%"
+                             placeholder="Digite a descrição da tarefa" />
 
             <br/><br/>
+
+            <!-- Responsavel + Prioridade -->
             <div style="display: flex; gap: 20px;">
                 <div style="flex: 1;">
-                    <p:outputLabel for="responsavel" value="Responsável:" style="display: block;" />
-                    <p:selectOneMenu id="responsavel" value="#{tarefaBean.responsavelId}" style="width: 90%;">
+                    <h:panelGroup layout="block" style="margin-bottom: 8px;">
+                        <i class='pi pi-user'></i>
+                        <span>Responsável</span>
+                    </h:panelGroup>
+                    <p:selectOneMenu id="responsavel"
+                                     value="#{tarefaBean.responsavelId}"
+                                     style="width: 90%;">
                         <f:selectItem itemLabel="Selecione..." itemValue="" noSelectionOption="true" />
                         <f:selectItems value="#{tarefaBean.pessoas}" var="r" itemLabel="#{r}" itemValue="#{r.id}" />
                     </p:selectOneMenu>
                 </div>
-            
+
                 <div style="flex: 1;">
-                    <p:outputLabel for="prioridade" value="Prioridade:" style="display: block;" />
-                    <p:selectOneMenu id="prioridade" value="#{tarefaBean.tarefa.prioridade}"  style="width: 90%;">
+                    <h:panelGroup layout="block" style="margin-bottom: 8px;">
+                        <i class='pi pi-sort'></i>
+                        <span>Prioridade*</span>
+                    </h:panelGroup>
+                    <p:selectOneMenu id="prioridade"
+                                     value="#{tarefaBean.tarefa.prioridade}"
+                                     required="true"
+                                     requiredMessage="Selecionar a Prioridade é obrigatório"
+                                     style="width: 90%;">
                         <f:selectItem itemLabel="Selecione..." itemValue="" noSelectionOption="true" />
                         <f:selectItems value="#{tarefaBean.prioridades}" var="p" itemLabel="#{p.descricao}" itemValue="#{p}" />
                     </p:selectOneMenu>
@@ -54,21 +83,34 @@
             </div>
             <br/><br/>
 
-            <p:outputLabel for="deadline" value="DeadLine:"  style="display: block;"  />
+             <!-- Deadline  -->
+            <h:panelGroup layout="block" style="margin-bottom: 8px;">
+                <i class='pi pi-calendar'></i>
+                <span>DeadLine</span>
+            </h:panelGroup>
             <p:datePicker id="deadline" 
                           value="#{tarefaBean.tarefa.deadline}"
                           pattern="dd/MM/yyyy" 
-                          mask="true"
                           mindate="#{tarefaBean.hoje}"
                           readonlyInput="true"
+                          showButtonBar="true"
+                          monthNavigator="true"
+                          yearNavigator="true"
+                          showIcon="true"
                           />
 
-            <br/><br/>
             
-
-            <p:commandButton value="Cadastrar"
-                             action="#{tarefaBean.salvar}"
-                             update="@form"/>
+            <!-- Botõoes inferiores -->
+            <div style="margin-top: 50px;">
+                
+                <p:button value="Cancelar" outcome="index" style="margin-right: 20px;" icon="pi pi-times"/>
+    
+                <p:commandButton value="Cadastrar"
+                                 icon="pi pi-save"
+                                 action="#{tarefaBean.salvar}"
+                                 update="@form"/>
+            </div>
+            
 
         </p:panel>
 
