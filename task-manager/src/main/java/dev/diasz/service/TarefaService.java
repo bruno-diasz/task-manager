@@ -1,5 +1,6 @@
 package dev.diasz.service;
 
+import dev.diasz.model.SituacaoTarefa;
 import dev.diasz.model.Tarefa;
 
 import javax.enterprise.context.ApplicationScoped;
@@ -16,7 +17,7 @@ public class TarefaService {
 
     @Transactional
     public void salvar(Tarefa tarefa) {
-        em.persist(tarefa);
+        em.merge(tarefa);
     }
 
     public List<Tarefa> listar() {
@@ -24,11 +25,24 @@ public class TarefaService {
                  .getResultList();
     }
 
+    public Tarefa buscarID(Long id){
+        return em.find(Tarefa.class, id);
+    }
+
     @Transactional
     public void remover(Long id) {
-        Tarefa t = em.find(Tarefa.class, id);
+        Tarefa t = buscarID(id);
         if (t != null) {
             em.remove(t);
         }
+    }
+
+
+    @Transactional
+    public void concluir(Long id){
+        Tarefa t = buscarID(id);
+        t.setSituacao(SituacaoTarefa.CONCLUIDA);
+        em.merge(t);
+
     }
 }

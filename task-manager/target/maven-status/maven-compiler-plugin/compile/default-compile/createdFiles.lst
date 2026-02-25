@@ -1,3 +1,8 @@
+dev/diasz/bean/PessoaBean.class
+dev/diasz/bean/TarefaBean.class
+dev/diasz/model/SituacaoTarefa.class
+dev/diasz/model/Prioridade.class
 dev/diasz/model/Tarefa.class
 dev/diasz/service/TarefaService.class
-dev/diasz/bean/TarefaBean.class
+dev/diasz/model/Pessoa.class
+dev/diasz/service/PessoaService.class

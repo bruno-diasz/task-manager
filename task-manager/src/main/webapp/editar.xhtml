@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+    <title>Editar Tarefa</title>
+</h:head>
+
+<h:body>
+    
+    <h:form id="formTarefa">
+
+        <p:panel header="Editar Tarefa" style="width:60%; margin: 0 auto;">
+
+            <p:messages autoUpdate="true" />
+
+            <!-- Título -->
+            <p:outputLabel for="titulo" value="Título:" />
+            
+            <p:inputText id="titulo"
+                         value="#{tarefaBean.tarefa.titulo}"
+                         required="true"
+                         requiredMessage="O título é obrigatório"
+                         style="width:100%" />
+
+            <br/><br/>
+
+            <!-- Descrição -->
+            <p:outputLabel for="descricao" value="Descrição:" />
+            <p:inputTextarea id="descricao"
+                             value="#{tarefaBean.tarefa.descricao}"
+                             required="true"
+                             requiredMessage="A descrição é obrigatória"
+                             autoResize="true"
+                             style="width:100%" />
+
+            <br/><br/>
+
+            <!-- Responsável + Prioridade -->
+            <div style="display: flex; gap: 20px;">
+                
+                <div style="flex: 1;">
+                    <p:outputLabel for="responsavel" value="Responsável:" style="display: block;" />
+                    
+                    <p:selectOneMenu id="responsavel"
+                                     value="#{tarefaBean.responsavelId}"
+                                     style="width: 90%;">
+
+                        <f:selectItem itemLabel="Selecione..." 
+                                      itemValue="#{null}" 
+                                      noSelectionOption="true"/>
+
+                        <f:selectItems value="#{tarefaBean.pessoas}"
+                                       var="r"
+                                       itemLabel="#{r.nome}"
+                                       itemValue="#{r.id}" />
+                    </p:selectOneMenu>
+                </div>
+            
+                <div style="flex: 1;">
+                    <p:outputLabel for="prioridade" value="Prioridade:" style="display: block;" />
+                    
+                    <p:selectOneMenu id="prioridade"
+                                     value="#{tarefaBean.tarefa.prioridade}"
+                                     style="width: 90%;">
+
+                        <f:selectItem itemLabel="Selecione..." 
+                                      itemValue="#{null}" 
+                                      noSelectionOption="true"/>
+
+                        <f:selectItems value="#{tarefaBean.prioridades}"
+                                       var="p"
+                                       itemLabel="#{p.descricao}"
+                                       itemValue="#{p}" />
+                    </p:selectOneMenu>
+                </div>
+            </div>
+
+            <br/><br/>
+
+            <!-- Deadline -->
+            <p:outputLabel for="deadline" value="DeadLine:" style="display: block;" />
+            
+            <p:datePicker id="deadline" 
+                          value="#{tarefaBean.tarefa.deadline}"
+                          pattern="dd/MM/yyyy" 
+                          mask="true"
+                          mindate="#{tarefaBean.hoje}"
+                          readonlyInput="true"/>
+
+            <br/><br/>
+
+            <!-- Botão salvar -->
+            <p:commandButton value="Salvar Alterações"
+                             action="#{tarefaBean.salvar}"
+                             update="@form"/>
+
+        </p:panel>
+
+    </h:form>
+
+</h:body>
+</html>

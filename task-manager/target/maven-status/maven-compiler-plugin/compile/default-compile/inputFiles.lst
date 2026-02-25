@@ -1,3 +1,8 @@
+/home/diasz/Work/java-curso/task-manager/task-manager/src/main/java/dev/diasz/bean/PessoaBean.java
 /home/diasz/Work/java-curso/task-manager/task-manager/src/main/java/dev/diasz/bean/TarefaBean.java
+/home/diasz/Work/java-curso/task-manager/task-manager/src/main/java/dev/diasz/model/Pessoa.java
+/home/diasz/Work/java-curso/task-manager/task-manager/src/main/java/dev/diasz/model/Prioridade.java
+/home/diasz/Work/java-curso/task-manager/task-manager/src/main/java/dev/diasz/model/SituacaoTarefa.java
 /home/diasz/Work/java-curso/task-manager/task-manager/src/main/java/dev/diasz/model/Tarefa.java
+/home/diasz/Work/java-curso/task-manager/task-manager/src/main/java/dev/diasz/service/PessoaService.java
 /home/diasz/Work/java-curso/task-manager/task-manager/src/main/java/dev/diasz/service/TarefaService.java

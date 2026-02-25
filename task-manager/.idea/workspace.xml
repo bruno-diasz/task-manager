@@ -5,9 +5,31 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="25a0e400-e5a6-4a88-87dc-07858aeed09d" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/java/dev/diasz/bean/TarefaBean.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/dev/diasz/model/Tarefa.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/META-INF/persistence.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../wildfly-23.0.2.Final/standalone/tmp/startup-marker" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../wildfly-23.0.2.Final/standalone/tmp/vfs/deployment/deployment195e8b347ae28f83/primefaces-8.0.jar-ae08e1a4f1ba66e6/contents/META-INF/resources/licenses.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../wildfly-23.0.2.Final/standalone/tmp/vfs/deployment/deployment195e8b347ae28f83/primefaces-8.0.jar-ae08e1a4f1ba66e6/contents/META-INF/resources/licenses/the apache software license, version 2.0 - license-2.0.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../wildfly-23.0.2.Final/standalone/tmp/vfs/deployment/deployment195e8b347ae28f83/primefaces-8.0.jar-ae08e1a4f1ba66e6/contents/META-INF/resources/licenses/the bsd 3-clause license - bsd-3-clause.txt.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../wildfly-23.0.2.Final/standalone/tmp/vfs/deployment/deployment195e8b347ae28f83/primefaces-8.0.jar-ae08e1a4f1ba66e6/contents/META-INF/resources/licenses/the json license - license.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../wildfly-23.0.2.Final/standalone/tmp/vfs/deployment/deployment195e8b347ae28f83/primefaces-8.0.jar-ae08e1a4f1ba66e6/contents/META-INF/resources/primefaces-aristo/theme.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../wildfly-23.0.2.Final/standalone/tmp/vfs/deployment/deployment195e8b347ae28f83/primefaces-8.0.jar-ae08e1a4f1ba66e6/contents/META-INF/resources/primefaces-luna-amber/theme.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../wildfly-23.0.2.Final/standalone/tmp/vfs/deployment/deployment195e8b347ae28f83/primefaces-8.0.jar-ae08e1a4f1ba66e6/contents/META-INF/resources/primefaces-luna-blue/theme.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../wildfly-23.0.2.Final/standalone/tmp/vfs/deployment/deployment195e8b347ae28f83/primefaces-8.0.jar-ae08e1a4f1ba66e6/contents/META-INF/resources/primefaces-luna-green/theme.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../wildfly-23.0.2.Final/standalone/tmp/vfs/deployment/deployment195e8b347ae28f83/primefaces-8.0.jar-ae08e1a4f1ba66e6/contents/META-INF/resources/primefaces-luna-pink/theme.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../wildfly-23.0.2.Final/standalone/tmp/vfs/deployment/deployment195e8b347ae28f83/primefaces-8.0.jar-ae08e1a4f1ba66e6/contents/META-INF/resources/primefaces-nova-colored/theme.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../wildfly-23.0.2.Final/standalone/tmp/vfs/deployment/deployment195e8b347ae28f83/primefaces-8.0.jar-ae08e1a4f1ba66e6/contents/META-INF/resources/primefaces-nova-dark/theme.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../wildfly-23.0.2.Final/standalone/tmp/vfs/deployment/deployment195e8b347ae28f83/primefaces-8.0.jar-ae08e1a4f1ba66e6/contents/META-INF/resources/primefaces-nova-light/theme.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../wildfly-23.0.2.Final/standalone/tmp/vfs/deployment/deployment195e8b347ae28f83/primefaces-8.0.jar-ae08e1a4f1ba66e6/contents/META-INF/resources/primefaces-omega/theme.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../wildfly-23.0.2.Final/standalone/tmp/vfs/deployment/deployment195e8b347ae28f83/primefaces-8.0.jar-ae08e1a4f1ba66e6/contents/META-INF/resources/primefaces/components.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../wildfly-23.0.2.Final/standalone/tmp/vfs/deployment/deployment195e8b347ae28f83/primefaces-8.0.jar-ae08e1a4f1ba66e6/contents/META-INF/resources/primefaces/components.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../wildfly-23.0.2.Final/standalone/tmp/vfs/deployment/deployment195e8b347ae28f83/primefaces-8.0.jar-ae08e1a4f1ba66e6/contents/META-INF/resources/primefaces/core.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../wildfly-23.0.2.Final/standalone/tmp/vfs/deployment/deployment195e8b347ae28f83/primefaces-8.0.jar-ae08e1a4f1ba66e6/contents/META-INF/resources/primefaces/dynamiccontent.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../wildfly-23.0.2.Final/standalone/tmp/vfs/temp/temp49408b2b3f96a09e/content-460fbfae61a6151b/META-INF/MANIFEST.MF" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../wildfly-23.0.2.Final/standalone/tmp/vfs/temp/temp49408b2b3f96a09e/content-460fbfae61a6151b/META-INF/maven/diasz.dev/task-manager/pom.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../wildfly-23.0.2.Final/standalone/tmp/vfs/temp/temp49408b2b3f96a09e/content-460fbfae61a6151b/META-INF/maven/diasz.dev/task-manager/pom.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../wildfly-23.0.2.Final/standalone/tmp/vfs/temp/temp49408b2b3f96a09e/content-460fbfae61a6151b/WEB-INF/classes/META-INF/persistence.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../wildfly-23.0.2.Final/standalone/tmp/vfs/temp/temp49408b2b3f96a09e/content-460fbfae61a6151b/WEB-INF/web.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../wildfly-23.0.2.Final/standalone/tmp/vfs/temp/temp49408b2b3f96a09e/content-460fbfae61a6151b/index.xhtml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../wildfly-23.0.2.Final/standalone/tmp/vfs/temp/temp49408b2b3f96a09e/content-460fbfae61a6151b/tasks_list.xhtml" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -17,28 +39,28 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
   </component>
-  <component name="ProjectColorInfo"><![CDATA[{
-  "associatedIndex": 3
-}]]></component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 3
+}</component>
   <component name="ProjectId" id="3A559pl3YcK0P6zZwJAaOTFimST" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "ModuleVcsDetector.initialDetectionPerformed": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "RunOnceActivity.git.unshallow": "true",
-    "RunOnceActivity.typescript.service.memoryLimit.init": "true",
-    "git-widget-placeholder": "main",
-    "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "/home/diasz/Work/java-curso/task-manager/task-manager",
-    "nodejs_package_manager_path": "npm",
-    "settings.editor.selected.configurable": "inlay.hints",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;ModuleVcsDetector.initialDetectionPerformed&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.typescript.service.memoryLimit.init&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
+    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;/home/diasz/Work/java-curso/task-manager/task-manager&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;inlay.hints&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/src/main" />
@@ -60,6 +82,7 @@
       <option name="presentableId" value="Default" />
       <updated>1771869442329</updated>
       <workItem from="1771869443912" duration="5085000" />
+      <workItem from="1771894582643" duration="234000" />
     </task>
     <servers />
   </component>

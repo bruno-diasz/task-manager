@@ -5,33 +5,109 @@
       xmlns:p="http://primefaces.org/ui">
 
 <h:head>
-    <title>Cadastro de Tarefa</title>
+    <title>Lista de Tarefas</title>
 </h:head>
 
 <h:body>
 
-    <h:form id="formTarefa">
-
-        <p:panel header="Nova Tarefa" style="width:400px">
-
+    <h:form id="form">
+        <p:panel header="Listagem de Tarefas" style="width:60%; margin: 0 auto;">
             <p:messages autoUpdate="true" />
 
-            <p:outputLabel for="titulo" value="Título:" />
+            <!-- Filtro / Busca -->
+            <div style="display: flex; gap: 20px;">
+                <div style="flex: 1;">
+                    <p:outputLabel for="idtarefa" value="Id: " />
+                    <p:inputNumber id="idtarefa"
+                                   value="0"
+                                   minValue="1" 
+                                   decimalPlaces="0" 
+                                   thousandSeparator="" 
+                                   decimalSeparator="" />
+                </div>
+                <div style="flex: 1;">
+                    <p:commandButton value="Buscar Tarefas"
+                                     action="#{tarefaBean.salvar}"
+                                     update="@form"/>
+                </div>
+            </div>
+
+            <br/>
             
+            <!-- Formulário de tarefa -->
+            <p:outputLabel for="titulo" value="Título/Descrição:" />
             <p:inputText id="titulo"
                          value="#{tarefaBean.tarefa.titulo}"
                          required="true"
                          requiredMessage="O título é obrigatório"
-                         style="width:100%" />
+                         style="width:95%" />
 
             <br/><br/>
 
-            <p:commandButton value="Salvar"
-                             action="#{tarefaBean.salvar}"
-                             update="@form"/>
+            <div style="display: flex; gap: 20px;">
+                <!-- Responsável -->
+                <div style="flex: 1;">
+                    <p:outputLabel for="responsavel" value="Responsável:" style="display: block;" />
+                    <p:selectOneMenu id="responsavel" value="#{tarefaBean.tarefa.responsavel}" style="width: 90%;">
+                        <f:selectItem itemLabel="Selecione..." itemValue="" noSelectionOption="true" />
+                        <f:selectItems value="#{tarefaBean.pessoas}" var="p" itemLabel="#{p.nome}" itemValue="#{p}" />
+                    </p:selectOneMenu>
+                </div>
+            
+                <!-- Situação -->
+                <div style="flex: 1;">
+                    <p:outputLabel for="situacao" value="Situação:" style="display: block;" />
+                    <p:selectOneMenu id="situacao" value="#{tarefaBean.tarefa.situacao}" style="width: 90%;">
+                        <f:selectItem itemLabel="Selecione..." itemValue="" noSelectionOption="true" />
+                        <f:selectItems value="#{tarefaBean.situacoes}" var="s" itemLabel="#{s.descricao}" itemValue="#{s}" />
+                    </p:selectOneMenu>
+                </div>
+            </div>
 
+            <br/><br/>
+
+            <!-- DataTable de tarefas -->
+            <p:dataTable id="tabelaTarefas" value="#{tarefaBean.lista}" var="t" style="width:100%;">
+
+                <p:column headerText="Id" style="width: 60px;">
+                    #{t.id}
+                </p:column>
+                <p:column headerText="Título">
+                    #{t.titulo}
+                </p:column>
+                <p:column headerText="Responsável">
+                    #{t.responsavel.nome}
+                </p:column>
+                <p:column headerText="Ações" style="text-align:center;">
+
+                    <p:link value="Ver | " outcome="visualizar" style="text-decoration: none;">
+                        <f:param name="id" value="#{t.id}" />
+                    </p:link>
+
+                    <p:link value="Editar | " outcome="editar" style="text-decoration: none;">
+                        <f:param name="id" value="#{t.id}" />
+                    </p:link>
+
+                    <p:commandLink value="Excluir | " 
+                                     actionListener="#{tarefaBean.remover(t.id)}"
+                                     update="@form" 
+                                     process="@this"
+                                     style="text-decoration: none;"
+                                    />
+                    
+
+                    <p:commandLink value="Concluir" 
+                                     actionListener="#{tarefaBean.concluir(t)}"
+                                     update="@form" 
+                                     process="@this"
+                                     style="text-decoration: none;"
+                                     
+                                     />
+
+                </p:column>
+
+            </p:dataTable>
         </p:panel>
-
     </h:form>
 
 </h:body>
