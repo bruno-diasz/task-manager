@@ -1,111 +1,84 @@
 # Task Manager
 
-Aplicação web para gerenciamento de tarefas desenvolvida com Java EE
-utilizando JSF, PrimeFaces, Hibernate e PostgreSQL.
+Aplicação web para gerenciamento de tarefas desenvolvida com Java EE (JSF, PrimeFaces, JPA) e implantada no ambiente cloud da Oracle Cloud Infrastructure (Always Free Tier).
 
-O objetivo do projeto é praticar desenvolvimento web com Java, aplicar
-arquitetura em camadas e integrar aplicação com banco de dados
-utilizando JTA no WildFly.
+Este projeto foi desenvolvido como parte de um desafio técnico para demonstrar habilidades em desenvolvimento Java para web, persistência de dados, e deployment em nuvem.
 
-------------------------------------------------------------------------
+## ✨ Funcionalidades
 
-# Tecnologias Utilizadas
+- ✅ **Criar, listar, atualizar e remover tarefas.**
+- ✅ **Concluir tarefas.**
+- ✅ **Filtrar tarefas por status e responsável.**
+- ✅ **Cadastrar, listar e remover responsáveis.**
+- ✅ **Interface amigável com PrimeFaces.**
 
--   Java 8
--   JSF 2.3
--   PrimeFaces 8
--   Hibernate 5.4.x
--   PostgreSQL 14
--   WildFly 23
--   Maven
--   Docker
+## 🛠️ Tecnologias Utilizadas
 
-------------------------------------------------------------------------
+- **Backend:** Java 8, Jakarta EE, CDI, JPA, Hibernate, JTA
+- **Frontend:** JSF 2.3, PrimeFaces 8
+- **Banco de Dados:** PostgreSQL 14
+- **Servidor de Aplicação:** WildFly 23
+- **Build:** Maven
+- **Versionamento:** Git, GitHub
+- **Cloud:** Oracle Cloud Infrastructure (Always Free Tier: VM.Standard.E2.1.Micro, Ubuntu 22.04)
+- **Ferramentas de Sistema:** Linux (Ubuntu)
 
-# Arquitetura do Projeto
+## 📝 Itens do Desafio Implementados
 
-Model → Entidades JPA\
-Service → Regras de negócio + Acesso a dados\
-Bean → Controladores JSF\
-View → XHTML + PrimeFaces
+- ✅ **a) Aplicação Java Web com JSF:** Interface completa com JSF e PrimeFaces.
+- ✅ **b) Persistência com PostgreSQL:** Banco de dados rodando na mesma VM.
+- ✅ **c) JPA:** Utilizado para mapeamento objeto-relacional (Hibernate como provider).
+- ✅ **e) Publicação em ambiente cloud:** Projeto implantado e acessível publicamente na Oracle Cloud.
 
-------------------------------------------------------------------------
+## 🚀 Acesse a Aplicação Online
 
-# Pré-requisitos
+A aplicação está publicada e pode ser acessada diretamente pelo link abaixo (ambiente de homologação/produção):
 
--   Java 8
--   Maven
--   Docker
--   WildFly 23
+🔗 **[http://152.67.35.49:8080/task-manager/](http://152.67.35.49:8080/task-manager/)**
 
-------------------------------------------------------------------------
+> **Nota:** Por ser um ambiente *Always Free*, a performance pode ser limitada, mas é totalmente funcional para testes e demonstração.
 
-# Banco de Dados (PostgreSQL via Docker)
+## 💻 Como Executar o Projeto Localmente (Ambiente de Desenvolvimento)
 
-## Subir container:
+Siga os passos abaixo para configurar e rodar o projeto em sua máquina.
 
-docker run --name postgres-task\
--e POSTGRES_DB=task_manager\
--e POSTGRES_USER=postgres\
--e POSTGRES_PASSWORD=postgres\
--p 5432:5432\
--d postgres:14
+### Pré-requisitos
 
-------------------------------------------------------------------------
+- **Java 8** (JDK)
+- **Maven**
+- **Docker** (para subir o PostgreSQL)
+- **WildFly 23** (ou versão compatível)
+- **Git**
 
-# Configuração do WildFly
+### Passo a Passo
 
-Criar Datasource:
+1.  **Clone o repositório:**
+    ```bash
+    git clone https://github.com/bruno-diasz/task-manager.git
+    cd task-manager
+    ```
 
--   JNDI Name: java:/jdbc/TaskDS
--   URL: jdbc:postgresql://localhost:5432/task_manager
--   User: postgres
--   Password: postgres
+2.  **Inicie o banco de dados PostgreSQL com Docker:**
+    ```bash
+    docker run --name postgres-task -e POSTGRES_DB=task_manager -e POSTGRES_USER=postgres -e POSTGRES_PASSWORD=postgres -p 5432:5432 -d postgres:14
+    ```
 
-------------------------------------------------------------------------
+3.  **Configure o Datasource no WildFly:**
+    - Inicie o WildFly: `./bin/standalone.sh`
+    - Conecte ao CLI: `./bin/jboss-cli.sh --connect`
+    - Adicione o datasource (os nomes `PostgreSQLDS` e `java:/PostgreSQLDS` são obrigatórios):
+      ```bash
+      /subsystem=datasources/jdbc-driver=postgresql:add(driver-name=postgresql, driver-module-name=org.postgresql, driver-class-name=org.postgresql.Driver)
 
-# Como Executar
+      data-source add --name=PostgreSQLDS --jndi-name=java:/PostgreSQLDS --driver-name=postgresql --connection-url=jdbc:postgresql://localhost:5432/task_manager --user-name=postgres --password=postgres --min-pool-size=5 --max-pool-size=20
+      ```
+    - *Nota: Você precisará ter baixado e adicionado o driver JDBC do PostgreSQL como um módulo no WildFly.*
 
-1)  Clonar projeto\
-    git clone https://github.com/seu-usuario/task-manager.git
-
-2)  Gerar WAR\
+4.  **Compile e faça o deploy da aplicação:**
+    ```bash
     mvn clean package
+    ```
+    Copie o arquivo `target/task-manager.war` para a pasta `standalone/deployments/` do seu WildFly.
 
-3)  Deploy no WildFly\
-    Copiar target/task-manager.war para standalone/deployments/
-
-4)  Acessar\
-    http://localhost:8080/task-manager
-
-------------------------------------------------------------------------
-
-# Funcionalidades
-
--   Criar tarefa
--   Listar tarefas
--   Atualizar tarefa
--   Remover tarefa
--   Concluir Tarefas
--   Filtrar Tarefas
--   Criar Responsaveis
--   Remover Responsaveis
--   Listar Responsaveis
-
-------------------------------------------------------------------------
-
-# Conceitos Aplicados
-
--   JSF Lifecycle
--   CDI
--   JPA + Hibernate
--   JTA
--   Arquitetura em camadas
--   Docker para ambiente local
-
-------------------------------------------------------------------------
-
-# Autor
-
-Bruno Dias\
-Estudante de Análise e Desenvolvimento de Sistemas
+5.  **Acesse a aplicação localmente:**
+    Abra o navegador em `http://localhost:8080/task-manager/`.
